@@ -40,7 +40,7 @@ const EditPost = () => {
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:4000/post/" + id).then((response) => {
+    fetch("https://mern-blog-app-sand-eight.vercel.app/" + id).then((response) => {
       response.json().then((postInfo) => {
         setTitle(postInfo.title);
         setContent(postInfo.content);
@@ -79,7 +79,7 @@ const EditPost = () => {
         };
 
         // Now, create and send the main POST request with all the data
-        const response = await fetch("http://localhost:4000/post", {
+        const response = await fetch("https://mern-blog-app-sand-eight.vercel.app/post", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

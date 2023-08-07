@@ -11,7 +11,7 @@ const Header = () => {
 
   const callProfile = async () => {
     try {
-      const response = await fetch("http://localhost:4000/profile", {
+      const response = await fetch("https://mern-blog-app-sand-eight.vercel.app/profile", {
         credentials: "include",
       });
 
@@ -27,7 +27,7 @@ const Header = () => {
   };
 
   const logout = () => {
-    fetch("http://localhost:4000/logout", {
+    fetch("https://mern-blog-app-sand-eight.vercel.app/logout", {
       credentials: "include",
       method: "POST",
     });

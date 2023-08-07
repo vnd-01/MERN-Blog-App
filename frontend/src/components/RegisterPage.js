@@ -20,7 +20,7 @@ const RegisterPage = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:4000/register", {
+    const response = await fetch("https://mern-blog-app-sand-eight.vercel.app/register", {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {

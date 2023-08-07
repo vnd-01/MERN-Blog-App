@@ -17,6 +17,10 @@ app.use(express.json());
 app.use(cookieParser());
 dotenv.config();
 
+app.get('/',(req,res)=>{
+    res.json("Hi, Welcome");
+})
+
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
   try {
