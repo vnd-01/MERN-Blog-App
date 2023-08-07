@@ -11,7 +11,7 @@ const PostPage = () => {
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    fetch(`https://mern-blog-app-sand-eight.vercel.app/post/${id}`).then((response) => {
+    fetch(`https://mern-blog-app-vikas.vercel.app/post/${id}`).then((response) => {
       response.json().then((postInfo) => {
         setPostInfo(postInfo);
       });
@@ -19,7 +19,7 @@ const PostPage = () => {
   }, []);
 
   const deletePost = async () => {
-    const response = await fetch(`https://mern-blog-app-sand-eight.vercel.app/delete/${id}`, {
+    const response = await fetch(`https://mern-blog-app-vikas.vercel.app/delete/${id}`, {
       method: "DELETE",
       credentials: "include",
     });

@@ -66,7 +66,7 @@ const CreatePost = () => {
         };
 
         // Now, create and send the main POST request with all the data
-        const response = await fetch("https://mern-blog-app-sand-eight.vercel.app/post", {
+        const response = await fetch("https://mern-blog-app-vikas.vercel.app/post", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

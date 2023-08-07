@@ -20,13 +20,16 @@ const RegisterPage = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("https://mern-blog-app-sand-eight.vercel.app/register", {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      "https://mern-blog-app-vikas.vercel.app/register",
+      {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (response.status === 200) {
       setRedirect(true);
       alert("Registration Successful");
