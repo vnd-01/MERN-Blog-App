@@ -12,14 +12,19 @@ const app = express();
 app.use("/uploads", express.static(__dirname + "/uploads"));
 connection();
 const salt = bcrypt.genSaltSync(10);
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(
+  cors({
+    credentials: true,
+    origin: "https://mern-blog-app-frontend-vikas.vercel.app",
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 dotenv.config();
 
-app.get('/',(req,res)=>{
-    res.json("Hi, Welcome");
-})
+app.get("/", (req, res) => {
+  res.json("Hi, Welcome");
+});
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
@@ -101,7 +106,7 @@ app.post("/post", async (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, process.env.SECRET_KEY, {}, async (err, info) => {
     if (err) throw err;
-    const { title, summary, content,imageUrl } = req.body;
+    const { title, summary, content, imageUrl } = req.body;
     //console.log(req.body);
     const newPost = await PostModel.create({
       title,
@@ -131,14 +136,15 @@ app.get("/post/:id", async (req, res) => {
 });
 
 app.put("/post", async (req, res) => {
-  const {imageUrl} = req.body;
+  const { imageUrl } = req.body;
   console.log(req.body);
   const { token } = req.cookies;
   jwt.verify(token, process.env.SECRET_KEY, {}, async (err, info) => {
     if (err) throw err;
     const { id, title, summary, content } = req.body;
     const findPost = await PostModel.findById(id);
-    const isAuthor = JSON.stringify(findPost.author) === JSON.stringify(info.id);
+    const isAuthor =
+      JSON.stringify(findPost.author) === JSON.stringify(info.id);
     if (!isAuthor) {
       return res.status(400).json("You are not Author");
     }
@@ -149,23 +155,24 @@ app.put("/post", async (req, res) => {
       image: imageUrl ? imageUrl : findPost.image,
     });
     res.json(findPost);
-});
+  });
 });
 
-app.delete('/delete/:id',async(req,res)=>{
-  const {token} = req.cookies;
-  jwt.verify(token,process.env.SECRET_KEY,{},async(err,info)=>{
-    if(err) throw err;
-    const {id} = req.params;
+app.delete("/delete/:id", async (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, process.env.SECRET_KEY, {}, async (err, info) => {
+    if (err) throw err;
+    const { id } = req.params;
     const deletePost = await PostModel.findById(id);
-    const isAuthor = JSON.stringify(deletePost.author) === JSON.stringify(info.id);
-    if(!isAuthor){
+    const isAuthor =
+      JSON.stringify(deletePost.author) === JSON.stringify(info.id);
+    if (!isAuthor) {
       return res.status(400).json("You are not Author");
     }
-    await PostModel.deleteOne({_id:id});
+    await PostModel.deleteOne({ _id: id });
     res.json("deleted Successfully");
-  })
-})
+  });
+});
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
