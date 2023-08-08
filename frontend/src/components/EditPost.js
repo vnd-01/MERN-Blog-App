@@ -61,13 +61,13 @@ const EditPost = () => {
     picData.append("cloud_name", "vnd01");
 
     try {
-      const picResponse = await fetch(process.env.REACT_APP_UPLOAD_URL, {
+      const picResponse = await fetch("//api.cloudinary.com/v1_1/vnd01/image/upload", {
         method: "POST",
         body: picData,
       });
       if (picResponse.ok) {
         const pic = await picResponse.json();
-        const imageUrl = pic.url;
+        const imageUrl = pic.url.toString();
 
         // Create the main POST request data
         const postData = {
