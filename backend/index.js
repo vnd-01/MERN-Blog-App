@@ -9,13 +9,13 @@ const cookieParser = require("cookie-parser");
 const PostModel = require("./models/Post");
 
 const app = express();
-app.use("/uploads", express.static(__dirname + "/uploads"));
 connection();
 const salt = bcrypt.genSaltSync(10);
 app.use(
   cors({
     credentials: true,
-    origin: "https://mern-blog-app-frontend-vikas.vercel.app",
+    origin: ["https://mern-blog-app-frontend-vikas.vercel.app"],
+    methods: ["POST", "GET", "PUT", "DELETE"],
   })
 );
 app.use(express.json());
